@@ -1,0 +1,64 @@
+name: Update README Automatically
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Generate README.md
+      - name: Generate README
+        run: |
+          python3 <<EOF
+          import os
+
+          def create_readme():
+              readme_path = "README.md"
+              difficulty_map = {}
+
+              # Walk through the repository and organize files by difficulty level
+              for root, dirs, files in os.walk("."):
+                  for file in files:
+                      if file.endswith(".py"):  # Include only Python files
+                          rel_dir = os.path.relpath(root, start=".")
+                          if rel_dir.startswith("Difficulty_"):
+                              difficulty = rel_dir.split("_")[1]
+                              difficulty_map.setdefault(difficulty, []).append(os.path.join(rel_dir, file))
+
+              # Generate README content
+              readme_content = "# GeeksForGeeks Solutions\n\n"
+              readme_content += "This repository contains solutions to various problems from GeeksForGeeks. Below is a list of problems organized by difficulty level.\n\n"
+
+              for difficulty in sorted(difficulty_map.keys()):
+                  readme_content += f"## Difficulty: {difficulty}\n"
+                  for file in sorted(difficulty_map[difficulty]):
+                      problem_name = os.path.splitext(os.path.basename(file))[0].replace("-", " ").title()
+                      readme_content += f"- [{problem_name}]({file})\n"
+                  readme_content += "\n"
+
+              with open(readme_path, "w") as readme_file:
+                  readme_file.write(readme_content)
+
+          create_readme()
+          EOF
+
+      # Step 3: Commit and push changes
+      - name: Commit and push changes
+        env:
+          TOKEN: ${{ secrets.PAT_TOKEN }}  # Use Personal Access Token (PAT)
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add README.md
+          git commit -m "Update README with file links" || echo "No changes to commit"
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
+          git push origin HEAD:main
