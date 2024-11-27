@@ -1,0 +1,64 @@
+name: Update README
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Generate README
+        run: |
+          python3 <<EOF
+          import os
+
+          def generate_readme():
+              readme_path = "README.md"
+
+              file_list = []
+              for root, dirs, files in os.walk("."):
+                  for file in files:
+                      if file != "README.md":
+                          rel_path = os.path.relpath(os.path.join(root, file), start="./")
+                          file_list.append(rel_path)
+
+              file_list.sort()
+
+              readme_content = "# GeeksForGeeks Repository\n\n"
+              readme_content += "This repository contains the code and solutions for various challenges on GeeksForGeeks.\n\n"
+              readme_content += "## Files in this repository\n\n"
+              readme_content += "Below is a list of the files and directories currently present in this repository:\n\n"
+              readme_content += "### File List:\n\n"
+
+              for file in file_list:
+                  readme_content += f"- [{file}](./{file})\n"
+
+              readme_content += "\n## How to Contribute\n\n"
+              readme_content += "1. Fork the repository\n"
+              readme_content += "2. Clone it to your local machine\n"
+              readme_content += "3. Create a new branch for your feature\n"
+              readme_content += "4. Commit your changes\n"
+              readme_content += "5. Push your changes and create a pull request\n\n"
+              readme_content += "## License\n\n"
+              readme_content += "This repository is licensed under the MIT License.\n"
+
+              with open(readme_path, "w") as readme_file:
+                  readme_file.write(readme_content)
+
+          generate_readme()
+          EOF
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add README.md
+          git commit -m "Update README with file links" || echo "No changes to commit"
+          git push
