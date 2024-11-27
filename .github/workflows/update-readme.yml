@@ -11,9 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Check out the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Step 2: Generate README.md
       - name: Generate README
         run: |
           python3 <<EOF
@@ -55,10 +57,14 @@ jobs:
           generate_readme()
           EOF
 
+      # Step 3: Commit and push changes
       - name: Commit and push changes
+        env:
+          TOKEN: ${{ secrets.PAT_TOKEN }} # Replace PAT_TOKEN with your repository secret
         run: |
           git config --local user.name "GitHub Actions"
           git config --local user.email "actions@github.com"
           git add README.md
           git commit -m "Update README with file links" || echo "No changes to commit"
-          git push
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${{ github.repository }}
+          git push origin HEAD:main
