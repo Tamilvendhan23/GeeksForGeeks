@@ -1,33 +1,39 @@
+
 class Solution:
-    def trappingWater(self, arr):
+    def maxWater(self, arr):
+        # code here
+ 
+        if not arr:
+            return 0
+        
         n = len(arr)
-        if n <= 2:
-            return 0  # No water can be trapped if there are less than 3 blocks
         
-        # Arrays to store the maximum height to the left and right of each block
-        left_max = [0] * n
-        right_max = [0] * n
-        water = 0
-
-        # Fill the left_max array
-        left_max[0] = arr[0]
-        for i in range(1, n):
-            left_max[i] = max(left_max[i-1], arr[i])
+        # Initialize two pointers
+        left, right = 0, n - 1
         
-        # Fill the right_max array
-        right_max[n-1] = arr[n-1]
-        for i in range(n-2, -1, -1):
-            right_max[i] = max(right_max[i+1], arr[i])
+        # Initialize variables to store the max heights
+        left_max, right_max = arr[left], arr[right]
         
-        # Calculate the water trapped at each block
-        for i in range(n):
-            water += min(left_max[i], right_max[i]) - arr[i]
+        water_trapped = 0
         
-        return water
-
-# Example usage
-solution = Solution()
-
+        while left <= right:
+            if arr[left] <= arr[right]:
+                # Process left side
+                if arr[left] >= left_max:
+                    left_max = arr[left]
+                else:
+                    water_trapped += left_max - arr[left]
+                left += 1
+            else:
+                # Process right side
+                if arr[right] >= right_max:
+                    right_max = arr[right]
+                else:
+                    water_trapped += right_max - arr[right]
+                right -= 1
+        
+        return water_trapped
+ 
 #{ 
  # Driver Code Starts
 #Initial template for Python 3
@@ -41,7 +47,7 @@ def main():
 
         arr = [int(x) for x in input().strip().split()]
         obj = Solution()
-        print(obj.trappingWater(arr))
+        print(obj.maxWater(arr))
 
         t -= 1
         print("~")
