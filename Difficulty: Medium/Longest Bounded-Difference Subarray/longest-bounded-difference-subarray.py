@@ -39,7 +39,7 @@ class Solution:
 
 #{ 
  # Driver Code Starts
-#Initial Template for Python 3
+#Initial Template for Python
 if __name__ == '__main__':
     tc = int(input())
     while tc > 0:
