@@ -31,23 +31,31 @@ class GFG {
 
 class Solution {
     long countWays(int n) {
-        long mod = 1000000007;
+        // long mod = 1000000007;
         
         // Base Cases
         if (n == 1) return 1;
         if (n == 2) return 2;
-        if (n==44) return 1134903170;
+        // if (n==44) return 1134903170;
 
-        long prev2 = 1; // Represents ways(0)
-        long prev1 = 1; // Represents ways(1)
-        long current = 0;
+        // long prev2 = 1; // Represents ways(0)
+        // long prev1 = 1; // Represents ways(1)
+        // long current = 0;
 
-        for (int i = 2; i <= n; i++) {
-            current = (prev1 + prev2) % mod;
-            prev2 = prev1;
-            prev1 = current;
+        // for (int i = 2; i <= n; i++) {
+        //     current = (prev1 + prev2) % mod;
+        //     prev2 = prev1;
+        //     prev1 = current;
+        // }
+
+        // return current;
+        long [] dp= new long[n+1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i=3 ; i<=n;i++){
+            dp[i]=dp[i-1]+dp[i-2];
+            
         }
-
-        return current;
+        return dp[n];
     }
 }
