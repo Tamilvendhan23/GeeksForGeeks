@@ -3,7 +3,6 @@
 ### Difficulty: Medium  
 **Accuracy:** 27.77%  
 **Platform:** [GeeksforGeeks Problem Link](https://www.geeksforgeeks.org/problems/sort-by-absolute-difference-1587115621/1)
-
 ---
 
 ## Problem Statement
