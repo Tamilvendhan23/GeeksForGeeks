@@ -1,4 +1,6 @@
 # H-Index Problem
+[View on GeeksforGeeks](https://www.geeksforgeeks.org/problems/find-h-index--165609/1)
+
 
 ## Problem Statement
 
