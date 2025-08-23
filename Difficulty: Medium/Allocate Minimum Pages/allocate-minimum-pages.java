@@ -5,7 +5,7 @@ class Solution {
         int currentSum = 0;
         
         for (int pages : arr) {
-            if (pages > maxPages) return false; // Can't allocate if single book exceeds limit
+            if (pages > maxPages) return false; 
             
             if (currentSum + pages > maxPages) {
                 studentsRequired++;
@@ -22,7 +22,7 @@ class Solution {
     
     public int findPages(int[] arr, int k) {
         int n = arr.length;
-        if (k > n) return -1; // Not enough books
+        if (k > n) return -1; 
         
         int low = 0, high = 0;
         for (int pages : arr) {
