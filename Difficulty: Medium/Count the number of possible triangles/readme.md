@@ -67,7 +67,7 @@ Copy code
 
 ## ✅ Solution (Java)
 
-```java
+```
 import java.util.Arrays;
 
 class Solution {
@@ -98,6 +98,8 @@ class Solution {
         return count;
     }
 }
+```
+
 ⏱️ Time Complexity
 Sorting: O(n log n)
 
