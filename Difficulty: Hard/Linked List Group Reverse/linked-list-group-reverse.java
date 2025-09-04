@@ -37,7 +37,6 @@ class Solution {
                 curr = next;
                 temp++;
             }
-            
             // 'head' is now the last node in the reversed group; connect it to rest
             head.next = reverseKGroup(curr, k);
             return prev;
