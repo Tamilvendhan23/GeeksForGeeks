@@ -1,98 +1,43 @@
-//{ Driver Code Starts
-import java.io.*;
-import java.util.*;
-
+/*
 class Node {
     int data;
     Node next;
 
-    Node(int x) {
-        data = x;
-        next = null;
-    }
-}
-
-
-// } Driver Code Ends
-
-/* class Node
-{
-    int data;
-    Node next;
-    Node(int data)
+    Node(int d)
     {
-        this.data = data;
+        data = d;
         next = null;
     }
 }*/
+
 class Solution {
-    static Node segregate(Node head) {
-        // Step 1: Count number of 0s, 1s, and 2s
-        int[] count = new int[3]; // count[0] = 0s, count[1] = 1s, count[2] = 2s
-        Node temp = head;
+    public Node segregate(Node head) {
+        // Create dummy nodes for 0s, 1s, and 2s to simplify linking
+        Node zeroD = new Node(0), oneD = new Node(0), twoD = new Node(0);
+        Node zero = zeroD, one = oneD, two = twoD;
         
-        while (temp != null) {
-            count[temp.data]++;
-            temp = temp.next;
-        }
-
-        // Step 2: Overwrite node values in sorted order
-        temp = head;
-        int i = 0;
-
-        while (temp != null) {
-            if (count[i] == 0) {
-                i++;
+        // Traverse the original list and distribute nodes
+        Node curr = head;
+        while (curr != null) {
+            if (curr.data == 0) {
+                zero.next = curr;
+                zero = zero.next;
+            } else if (curr.data == 1) {
+                one.next = curr;
+                one = one.next;
             } else {
-                temp.data = i;
-                count[i]--;
-                temp = temp.next;
+                two.next = curr;
+                two = two.next;
             }
+            curr = curr.next;
         }
-
-        return head;
+        
+        // Connect three lists together
+        zero.next = (oneD.next != null) ? oneD.next : twoD.next;
+        one.next = twoD.next;
+        two.next = null; // End the list
+        
+        // New head is the start of the '0's list or other non-empty lists
+        return zeroD.next;
     }
 }
-
-
-
-
-//{ Driver Code Starts.
-
-class GFG {
-    public static void printList(Node node) {
-        while (node != null) {
-            System.out.print(node.data + " ");
-            node = node.next;
-        }
-        System.out.println();
-    }
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine().trim());
-
-        while (t-- > 0) {
-            List<Integer> arr = new ArrayList<>();
-            String input = br.readLine().trim();
-            StringTokenizer st = new StringTokenizer(input);
-            while (st.hasMoreTokens()) {
-                arr.add(Integer.parseInt(st.nextToken()));
-            }
-
-            Node head = null;
-            if (!arr.isEmpty()) {
-                head = new Node(arr.get(0));
-                Node tail = head;
-                for (int i = 1; i < arr.size(); i++) {
-                    tail.next = new Node(arr.get(i));
-                    tail = tail.next;
-                }
-            }
-            head = new Solution().segregate(head);
-            printList(head);
-            System.out.println("~");
-        }
-    }
-}
-// } Driver Code Ends
