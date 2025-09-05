@@ -10,6 +10,7 @@ class Node {
     }
 }*/
 
+
 class Solution {
     public Node segregate(Node head) {
         // Create dummy nodes for 0s, 1s, and 2s to simplify linking
@@ -41,3 +42,5 @@ class Solution {
         return zeroD.next;
     }
 }
+
+
