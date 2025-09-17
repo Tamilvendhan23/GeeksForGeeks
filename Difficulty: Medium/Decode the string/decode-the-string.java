@@ -20,7 +20,7 @@ class Solution {
                 }
                 curr = prev;
             } else {
-                curr.append(c);           // Append characters to current string
+                curr.append(c);           
             }
         }
         return curr.toString();
