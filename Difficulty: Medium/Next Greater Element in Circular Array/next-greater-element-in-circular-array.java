@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public ArrayList<Integer> nextGreater(int[] arr) {
         int n = arr.length;
