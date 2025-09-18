@@ -1,26 +1,27 @@
 import java.util.*;
 
 class Solution {
-    public ArrayList<Integer> nextLargerElement(int[] arr) {
+    public ArrayList<Integer> nextGreater(int[] arr) {
         int n = arr.length;
-        ArrayList<Integer> result = new ArrayList<>(Collections.nCopies(n, -1));
-        Stack<Integer> stack = new Stack<>();
-
-        for (int i = 0; i < 2 * n; i++) {
-            int current = arr[i % n];
-
-            // Compare with elements in stack
-            while (!stack.isEmpty() && arr[stack.peek()] < current) {
-                int index = stack.pop();
-                result.set(index, current);
+        ArrayList<Integer> res = new ArrayList<>(Collections.nCopies(n, -1));
+        Deque<Integer> stack = new ArrayDeque<>();
+        
+        for (int i = 2 * n - 1; i >= 0; i--) {
+            int idx = i % n;
+            
+            // Maintain decreasing stack
+            while (!stack.isEmpty() && arr[stack.peek()] <= arr[idx]) {
+                stack.pop();
             }
-
-            // Push index only in first loop
-            if (i < n) {
-                stack.push(i);
+            
+            // Only fill answers in the first pass
+            if (i < n && !stack.isEmpty()) {
+                res.set(idx, arr[stack.peek()]);
             }
+            
+            stack.push(idx);
         }
-
-        return result;
+        
+        return res;
     }
 }
