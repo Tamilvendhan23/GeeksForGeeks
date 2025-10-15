@@ -31,7 +31,7 @@ class Solution {
             result = node.data;
             return; // stop further traversal
         }
-
+        
         // Traverse right subtree
         inorder(node.right, k);
     }
