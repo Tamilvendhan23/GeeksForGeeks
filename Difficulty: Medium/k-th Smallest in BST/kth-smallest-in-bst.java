@@ -1,3 +1,15 @@
+/*
+class Node {
+    int data;
+    Node left, right;
+
+    public Node(int d)
+    {
+        data = d;
+        left = right = null;
+    }
+}
+*/
 class Solution {
     int count = 0;
     int result = -1;
