@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public ArrayList<ArrayList<Integer>> kClosest(int[][] points, int k) {
         PriorityQueue<int[]> pq = new PriorityQueue<>(
