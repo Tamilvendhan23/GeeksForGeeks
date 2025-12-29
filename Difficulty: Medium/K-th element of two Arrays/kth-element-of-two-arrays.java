@@ -27,7 +27,6 @@ class Solution {
             else {
                 low = cutA + 1;
             }
-        }
-        return -1; // unreachable
+        } return -1; // unreachable
     }
 }
