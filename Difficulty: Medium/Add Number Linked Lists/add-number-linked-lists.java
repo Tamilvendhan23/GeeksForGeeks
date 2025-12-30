@@ -48,7 +48,6 @@ class Solution {
         while (result != null && result.data == 0 && result.next != null) {
             result = result.next;
         }
-
-        return result;
+return result;
     }
 }
