@@ -11,6 +11,7 @@ class Solution {
             dq.addLast(i);
         }
         result.add(arr[dq.peekFirst()]);
+
         
         // Process remaining elements
         for (int i = k; i < arr.length; i++) {
