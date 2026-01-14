@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public int catchThieves(char[] arr, int k) {
         List<Integer> police = new ArrayList<>();
