@@ -1,36 +1,30 @@
-import java.util.*;
-
 class Solution {
-    public ArrayList<Integer> findGreater(int[] arr) {
+    public ArrayList<Integer> nextFreqGreater(int[] arr) {
         int n = arr.length;
-        ArrayList<Integer> res = new ArrayList<>(Collections.nCopies(n, -1));
         HashMap<Integer, Integer> freq = new HashMap<>();
-
-        // Step 1: Calculate frequency of each element
+        
+        // Build frequency map
         for (int num : arr) {
             freq.put(num, freq.getOrDefault(num, 0) + 1);
         }
-
-        Stack<Integer> stack = new Stack<>();
-
-        // Step 2: Traverse from right to left
+        
+        ArrayList<Integer> result = new ArrayList<>();
+        Stack<Integer> st = new Stack<>();
+        
         for (int i = n - 1; i >= 0; i--) {
-            int currFreq = freq.get(arr[i]);
-
-            // Pop elements from stack with freq <= currFreq
-            while (!stack.isEmpty() && freq.get(stack.peek()) <= currFreq) {
-                stack.pop();
+            while (!st.isEmpty() && freq.get(arr[st.peek()]) <= freq.get(arr[i])) {
+                st.pop();
             }
-
-            // If stack is not empty, top is the next greater freq element
-            if (!stack.isEmpty()) {
-                res.set(i, stack.peek());
+            if (st.isEmpty()) {
+                result.add(-1);
+            } else {
+                result.add(arr[st.peek()]);
             }
-
-            // Push current element
-            stack.push(arr[i]);
+            st.push(i);
         }
-
-        return res;
+        
+        // Reverse the result since we built it from right to left
+        Collections.reverse(result);
+        return result;
     }
 }
