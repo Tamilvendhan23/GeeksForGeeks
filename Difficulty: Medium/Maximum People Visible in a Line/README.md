@@ -4,6 +4,8 @@
 <li data-start="553" data-end="583"><span style="font-size: 14pt;">height[j] &lt; height[i],</span><span style="font-size: 14pt;"> </span></li>
 <li data-start="586" data-end="668"><span style="font-size: 14pt;">There is no person <strong>k</strong> standing between them such that height[k]&nbsp;</span><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">≥&nbsp;</span><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 18.6667px;">height[i]</span><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 18.6667px;">.</span></li>
 </ul>
+
+  
 <p><span style="font-size: 14pt;"> </span></p>
 <p data-start="279" data-end="439"><span style="font-size: 14pt;"> </span></p>
 <p data-start="670" data-end="832"><span style="font-size: 14pt;">Each person can see in both directions (front and back).</span><br data-start="726" data-end="729"><span style="font-size: 14pt;"> Your task is to find the <strong data-start="754" data-end="806">maximum number of people </strong>that any person can see (including themselves).</span></p>
