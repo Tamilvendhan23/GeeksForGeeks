@@ -3,21 +3,23 @@ import java.util.HashMap;
 class Solution {
     public boolean isSubset(int a[], int b[]) {
 
-        HashMap<Integer, Integer> freq = new HashMap<>();
+    int m = a.length, n = b.length;
 
-        // Count frequency of array a
-        for (int x : a) {
-            freq.put(x, freq.getOrDefault(x, 0) + 1);
-        }
+        for (int i = 0; i < n; i++) {
+            boolean found = false;
 
-        // Check elements of b
-        for (int x : b) {
-            if (!freq.containsKey(x) || freq.get(x) == 0) {
-                return false;
+            for (int j = 0; j < m; j++) {
+                if (b[i] == a[j]) {
+                    found = true;
+                    a[j] = -1; // mark as visited
+                    break;
+                }
             }
-            freq.put(x, freq.get(x) - 1);
+
+            if (!found) return false;
         }
 
         return true;
+    
     }
 }
