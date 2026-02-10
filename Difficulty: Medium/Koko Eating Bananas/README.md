@@ -3,6 +3,7 @@
 <ul data-start="338" data-end="502">
 <li data-start="338" data-end="413"><span style="font-size: 14pt;"> </span>
 <p data-start="340" data-end="413"><span style="font-size: 14pt;">If the pile has <strong data-start="356" data-end="368">at least</strong> <code data-start="369" data-end="372"><strong>s</strong></code> bananas, she eats exactly <strong><code data-start="399" data-end="402">s</code></strong> bananas.</span></p>
+  
 <span style="font-size: 14pt;"> </span></li>
 <li data-start="414" data-end="502"><span style="font-size: 14pt;"> </span>
 <p data-start="416" data-end="502"><span style="font-size: 14pt;">If the pile has <strong data-start="432" data-end="441">fewer</strong> than <strong><code data-start="447" data-end="450">s</code></strong> bananas, she eats the <strong data-start="473" data-end="488">entire pile</strong> in that hour.</span></p>
