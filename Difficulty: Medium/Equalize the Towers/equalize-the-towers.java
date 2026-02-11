@@ -1,41 +1,34 @@
-
 class Solution {
+
+    private long findCost(int[] heights, int[] cost, int h) {
+        long res = 0;
+        for (int i = 0; i < heights.length; i++) {
+            res += (long) Math.abs(heights[i] - h) * cost[i];
+        }
+        return res;
+    }
+
     public int minCost(int[] heights, int[] cost) {
-        int n = heights.length;
+        int low = heights[0], high = heights[0];
 
-        // Pair height and cost together
-        int[][] pairs = new int[n][2];
-        for (int i = 0; i < n; i++) {
-            pairs[i][0] = heights[i];
-            pairs[i][1] = cost[i];
+        for (int h : heights) {
+            low = Math.min(low, h);
+            high = Math.max(high, h);
         }
 
-        // Sort by height
-        Arrays.sort(pairs, Comparator.comparingInt(a -> a[0]));
+        while (low < high) {
+            int mid = low + (high - low) / 2;
 
-        // Find total weight
-        long totalWeight = 0;
-        for (int i = 0; i < n; i++) {
-            totalWeight += pairs[i][1];
-        }
+            long costMid = findCost(heights, cost, mid);
+            long costNext = findCost(heights, cost, mid + 1);
 
-        // Find weighted median
-        long prefix = 0;
-        int targetHeight = 0;
-        for (int i = 0; i < n; i++) {
-            prefix += pairs[i][1];
-            if (prefix >= (totalWeight + 1) / 2) {
-                targetHeight = pairs[i][0];
-                break;
+            if (costMid <= costNext) {
+                high = mid;
+            } else {
+                low = mid + 1;
             }
         }
 
-        // Calculate total cost to make all heights equal to targetHeight
-        long result = 0;
-        for (int i = 0; i < n; i++) {
-            result += 1L * Math.abs(heights[i] - targetHeight) * cost[i];
-        }
-
-        return (int) result;
+        return (int) findCost(heights, cost, low);
     }
 }
