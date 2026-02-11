@@ -1,3 +1,5 @@
+//optimized
+
 class Solution {
 
     private long findCost(int[] heights, int[] cost, int h) {
