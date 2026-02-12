@@ -1,43 +1,47 @@
 class Solution {
-    public int maxMinHeight(int[] arr, int k, int w) {
+    private boolean canAchieve(int[] arr, int k, int w, long target) {
         int n = arr.length;
-        int low = Arrays.stream(arr).min().getAsInt();
-        int high = low + k;
-        int answer = low;
-
+        long[] water = new long[n];
+        long daysLeft = k;
+        
+        for (int i = 0; i < n; i++) {
+            if (i > 0) {
+                water[i] = water[i - 1];
+            }
+            long currHeight = (long)arr[i] + water[i];
+            if (i >= w) {
+                currHeight -= water[i - w];
+            }
+            if (currHeight < target) {
+                long need = target - currHeight;
+                water[i] += need;
+                daysLeft -= need;
+                if (daysLeft < 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    public int maxMinHeight(int[] arr, int k, int w) {
+        long minH = Integer.MAX_VALUE;
+        for (int h : arr) {
+            if (h < minH) minH = h;
+        }
+        long low = minH;
+        long high = minH + k;
+        long ans = minH;
+        
         while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (isPossible(arr, k, w, mid)) {
-                answer = mid;
+            long mid = low + (high - low) / 2;
+            if (canAchieve(arr, k, w, mid)) {
+                ans = mid;
                 low = mid + 1;
             } else {
                 high = mid - 1;
             }
         }
-        return answer;
-    }
-
-    private boolean isPossible(int[] arr, int k, int w, int target) {
-        int n = arr.length;
-        int[] increment = new int[n + 1]; // difference array
-        long operations = 0;
-        int currentAdd = 0;
-
-        for (int i = 0; i < n; i++) {
-            currentAdd += increment[i];
-            int currentHeight = arr[i] + currentAdd;
-
-            if (currentHeight < target) {
-                int need = target - currentHeight;
-                operations += need;
-                if (operations > k) return false;
-
-                currentAdd += need;
-                if (i + w < increment.length) {
-                    increment[i + w] -= need;
-                }
-            }
-        }
-        return true;
+        return (int)ans;
     }
 }
