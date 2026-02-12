@@ -1,3 +1,4 @@
+//updated
 class Solution {
     private boolean canAchieve(int[] arr, int k, int w, long target) {
         int n = arr.length;
