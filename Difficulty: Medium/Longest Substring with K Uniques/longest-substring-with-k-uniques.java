@@ -1,31 +1,32 @@
-import java.util.*;
-
 class Solution {
     public int longestKSubstr(String s, int k) {
-        int maxLength = -1;
-        int start = 0;
-        Map<Character, Integer> freqMap = new HashMap<>();
-
-        for (int end = 0; end < s.length(); end++) {
-            char endChar = s.charAt(end);
-            freqMap.put(endChar, freqMap.getOrDefault(endChar, 0) + 1);
-
-            // Shrink the window if we have more than k distinct characters
-            while (freqMap.size() > k) {
-                char startChar = s.charAt(start);
-                freqMap.put(startChar, freqMap.get(startChar) - 1);
-                if (freqMap.get(startChar) == 0) {
-                    freqMap.remove(startChar);
-                }
-                start++;
+        int n = s.length();
+        int[] freq = new int[26];
+        int left = 0;
+        int uniques = 0;
+        int maxLen = -1;
+        
+        for (int right = 0; right < n; right++) {
+            int idx = s.charAt(right) - 'a';
+            freq[idx]++;
+            if (freq[idx] == 1) {
+                uniques++;
             }
-
-            // Check if window is valid
-            if (freqMap.size() == k) {
-                maxLength = Math.max(maxLength, end - start + 1);
+            
+            while (uniques > k && left <= right) {
+                int leftIdx = s.charAt(left) - 'a';
+                freq[leftIdx]--;
+                if (freq[leftIdx] == 0) {
+                    uniques--;
+                }
+                left++;
+            }
+            
+            if (uniques == k) {
+                maxLen = Math.max(maxLen, right - left + 1);
             }
         }
-
-        return maxLength;
+        
+        return maxLen;
     }
 }
