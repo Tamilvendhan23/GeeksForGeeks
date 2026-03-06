@@ -1,54 +1,52 @@
-import java.util.*;
-
 class Solution {
-    public static String smallestWindow(String s, String p) {
-        if (s.length() < p.length()) return "";
-
-        // frequency of characters in p
-        int[] freqP = new int[26];
-        for (char c : p.toCharArray()) {
-            freqP[c - 'a']++;
+    public static String minWindow(String s, String p) {
+        int len1 = s.length();
+        int len2 = p.length();
+        
+        if (len1 < len2) return "";
+        
+        int[] countP = new int[26];
+        int[] countWindow = new int[26];
+        
+        // Count required characters from p
+        for (char ch : p.toCharArray()) {
+            countP[ch - 'a']++;
         }
-
-        int[] freqS = new int[26];
-        int start = 0, minLen = Integer.MAX_VALUE, startIndex = -1;
-        int count = 0; // how many chars matched
-
-        for (int end = 0; end < s.length(); end++) {
-            char c = s.charAt(end);
-            freqS[c - 'a']++;
-
-            // if this character is needed and not exceeded requirement
-            if (freqS[c - 'a'] <= freqP[c - 'a']) {
-                count++;
+        
+        int required = p.length(); // Total characters needed
+        int formed = 0; // Characters currently satisfied
+        int left = 0;
+        int minLen = Integer.MAX_VALUE;
+        int startIdx = -1;
+        
+        for (int right = 0; right < len1; right++) {
+            char rightCh = s.charAt(right);
+            countWindow[rightCh - 'a']++;
+            
+            // If we've included one more required character
+            if (countP[rightCh - 'a'] > 0 && countWindow[rightCh - 'a'] <= countP[rightCh - 'a']) {
+                formed++;
             }
-
-            // if all characters matched
-            if (count == p.length()) {
-                // shrink from left
-                while (freqS[s.charAt(start) - 'a'] > freqP[s.charAt(start) - 'a'] 
-                       || freqP[s.charAt(start) - 'a'] == 0) {
-                    if (freqS[s.charAt(start) - 'a'] > freqP[s.charAt(start) - 'a']) {
-                        freqS[s.charAt(start) - 'a']--;
-                    }
-                    start++;
+            
+            // Try to contract the window from the left
+            while (formed == required && left <= right) {
+                char leftCh = s.charAt(left);
+                
+                int currLen = right - left + 1;
+                if (currLen < minLen) {
+                    minLen = currLen;
+                    startIdx = left;
                 }
-
-                int windowLen = end - start + 1;
-                if (windowLen < minLen) {
-                    minLen = windowLen;
-                    startIndex = start;
+                
+                countWindow[leftCh - 'a']--;
+                if (countP[leftCh - 'a'] > 0 && countWindow[leftCh - 'a'] < countP[leftCh - 'a']) {
+                    formed--;
                 }
+                left++;
             }
         }
-
-        if (startIndex == -1) return "";
-        return s.substring(startIndex, startIndex + minLen);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(smallestWindow("timetopractice", "toc")); // "toprac"
-        System.out.println(smallestWindow("zoomlazapzo", "oza"));    // "apzo"
-        System.out.println(smallestWindow("zoom", "zooe"));          // ""
+        
+        if (startIdx == -1) return "";
+        return s.substring(startIdx, startIdx + minLen);
     }
 }
