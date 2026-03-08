@@ -1,31 +1,23 @@
-// import java.util.HashSet;
+import java.util.*;
 
 class Solution {
     boolean pythagoreanTriplet(int[] arr) {
         int n = arr.length;
-
-        // Step 1: Square all elements and store them
-        int[] squares = new int[n];
-        for (int i = 0; i < n; i++) {
-            squares[i] = arr[i] * arr[i];
+        HashSet<Integer> st = new HashSet<>();
+        for (int num : arr) {
+            st.add(num);
         }
-
-        // Step 2: Check for every pair (a^2 + b^2) and see if it's in the set
-        HashSet<Integer> squareSet = new HashSet<>();
-        for (int val : squares) {
-            squareSet.add(val);
-        }
-
-        // Step 3: Try all pairs (a, b) and check if a^2 + b^2 exists
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
-                int sum = squares[i] + squares[j];
-                if (squareSet.contains(sum)) {
+                long a = arr[i];
+                long b = arr[j];
+                long sumSq = a * a + b * b;
+                long c = (long) Math.sqrt(sumSq);
+                if (c * c == sumSq && st.contains((int) c)) {
                     return true;
                 }
             }
         }
-
         return false;
     }
 }
