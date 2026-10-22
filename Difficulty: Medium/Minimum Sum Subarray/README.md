@@ -1,0 +1,7 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/smallest-sum-contiguous-subarray/1?timeMachineDate=2026-10-21">Minimum Sum Subarray</a></h2><h3>Difficulty Level : Difficulty: Medium</h3><hr><div class="problems_problem_content__Xm_eO" style="--text-color: var(--problem-text-color);"><p><span style="font-size: 18px;">Given an array <strong>arr[]</strong>, find the minimum sum of a subarray containing atleast one element in the given array.</span></p><p><strong><span style="font-size: 18px;">Examples:</span></strong></p><pre><span style="font-size: 18px;"><strong>Input:</strong> arr[] = [3, -4, 2, -3, -1, 7, -5]
+<strong>Output:</strong> -6
+<strong>Explanation: </strong>The subarray [-4, 2, -3, -1] has the minimum sum, which is -6.</span></pre><pre><span style="font-size: 18px;"><strong>Input:</strong> arr[] = [4, -6, 3, -2, 5, -8, 2]
+<strong>Output:</strong> -8
+<strong>Explanation: </strong>The subarray [-8] has the minimum sum, which is -8.</span></pre><pre><span style="font-size: 18px;"><strong>Input: </strong>arr[] = [2, 6, 8, 1, 4]
+<strong>Output:</strong> 1
+<strong>Explanation:</strong> The subarray [1] has the minimum sum, which is 1.</span></pre></div><br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Arrays</code>&nbsp;<code>Dynamic Programming</code>&nbsp;
