@@ -1,0 +1,7 @@
+<h2><a href="https://www.geeksforgeeks.org/problems/find-xor-of-numbers-from-l-to-r/1">XOR of Number Range</a></h2><h3>Difficulty Level : Difficulty: Easy</h3><hr><div class="problems_problem_content__Xm_eO" style="--text-color: var(--problem-text-color);"><p><span style="font-size: 14pt;">Given two integers <strong>l</strong> and <strong>r</strong>, find the bitwise XOR of all integers in the range <strong>[l, r]</strong> (both inclusive).</span></p><p><span style="font-size: 18px;"><strong>Examples:</strong></span></p><pre><span style="font-size: 18px;"><strong>Input: </strong>l = 4, r = 8 
+<strong>Output: </strong>8 
+<strong>Explanation: </strong>The XOR of all integers from 4 to 8 is (4 xor 5 xor 6 xor 7 xor 8) = 8.</span></pre><pre><span style="font-size: 18px;"><strong>Input: </strong>l = 2, r = 4<strong>
+Output: </strong>5<strong>
+Explanation: </strong>The XOR of all integers from 2 to 4 is (2 xor 3 xor 4) = 5.</span></pre><pre><span style="font-size: 18px;"><strong>Input: </strong>l = 5, r = 9<strong>
+Output: </strong>5<strong>
+Explanation: </strong>The XOR of all integers from 5 to 9 is (5 xor 6 xor 7 xor 8 xor 9) = 5.<br></span></pre><p><strong><span style="font-size: 18px;">Constraints:<br></span></strong></p><p><span style="font-size: 18px;">1&nbsp;</span>≤ l ≤ r ≤ 10<sup>9</sup></p></div><br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Bit Magic</code>&nbsp;
